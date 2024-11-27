@@ -12,9 +12,7 @@ public class EmployeeManager {
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader filReader = new BufferedReader(new InputStreamReader(new FileInputStream("employees.txt")));
-                String line = filReader.readLine();
-                String part[] = line.split(",");
+                String part[] = filePartsR("employees.txt");
                 for (String emp : part) {
                     System.out.println(emp);
                 }
@@ -52,9 +50,7 @@ public class EmployeeManager {
         else if (args[0].contains("?")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader filReader = new BufferedReader(new InputStreamReader(new FileInputStream("employees.txt")));
-                String line = filReader.readLine();
-                String part[] = line.split(",");
+                String part[] = filePartsR("employees.txt");
                 boolean found = false;
                 String string = args[0].substring(1);
                 for (int i = 0; i < part.length && !found; i++) {
@@ -93,9 +89,7 @@ public class EmployeeManager {
         else if (args[0].contains("u")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader filReader = new BufferedReader(new InputStreamReader(new FileInputStream("employees.txt")));
-                String line = filReader.readLine();
-                String part[] = line.split(",");
+                String part[] = filePartsR("employees.txt");
                 String n = args[0].substring(1);
                 for (int i = 0; i < part.length; i++) {
                     if (part[i].equals(n)) {
@@ -112,11 +106,8 @@ public class EmployeeManager {
         else if (args[0].contains("d")) {
             System.out.println("Loading data ...");
             try {
-                BufferedReader filReader = new BufferedReader(new InputStreamReader(new FileInputStream("employees.txt")));
-                String line = filReader.readLine();
-                String part[] = line.split(",");
                 String n = args[0].substring(1);
-                List<String> list = new ArrayList<>(Arrays.asList(part));
+                List<String> list = new ArrayList<>(Arrays.asList(filePartsR("employees.txt")));
                 list.remove(n);
                 BufferedWriter fileWriter = new BufferedWriter(new FileWriter("employees.txt"));
                 fileWriter.write(String.join(",", list));
@@ -124,5 +115,16 @@ public class EmployeeManager {
             } catch (Exception e) {}
             System.out.println("Data Deleted.");
         }
+    }
+    static String[] filePartsR(String file){
+        BufferedReader filReader;
+        String line="";
+        try {
+            filReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            line = filReader.readLine();
+            filReader.close();
+        }catch(Exception e){}
+        String part[] = line.split(",");
+        return part;
     }
 }
