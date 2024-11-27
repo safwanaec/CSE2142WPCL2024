@@ -36,8 +36,7 @@ public class EmployeeManager {
         } else if (args[0].contains("+")) {
             System.out.println("Loading data ...");
             try {
-                String newLine = args[0].substring(1);
-                appendToFile(cons.filename, ", " + newLine);
+                appendToFile(cons.filename, ", " + args[0].substring(1));
             } catch (Exception e) {
             }
             System.out.println("Data Loaded.");
@@ -80,14 +79,13 @@ public class EmployeeManager {
                 String[] part = readFile(cons.filename);
                 String target = args[0].substring(1);
                 List<String> list = new ArrayList<>(Arrays.asList(part));
-                list.remove(target);
+                list.remove(args[0].substring(1));
                 writeToFile(cons.filename, String.join(",", list));
             } catch (Exception e) {
             }
             System.out.println("Data Deleted.");
         }
     }
-
     // Method to read data from file
     static String[] readFile(String fileName) throws IOException {
         BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
