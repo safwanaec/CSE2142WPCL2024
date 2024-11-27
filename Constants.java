@@ -1,5 +1,3 @@
-
 public class Constants {
-
-    String filename = cons.filename;
+    String filename = "employees.txt";
 }

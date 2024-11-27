@@ -16,7 +16,7 @@ public class EmployeeManager {
         if (args[0].equals("l")) {
             System.out.println("Loading data ...");
             try {
-                String[] part = readFile(cons.filename);
+                String[] part = readFile("employees.txt");
                 for (String emp : part) {
                     System.out.println(emp);
                 }
@@ -26,7 +26,7 @@ public class EmployeeManager {
         } else if (args[0].equals("s")) {
             System.out.println("Loading data ...");
             try {
-                String[] part = readFile(cons.filename);
+                String[] part = readFile("employees.txt");
                 Random rand = new Random();
                 int idx = rand.nextInt(part.length);
                 System.out.println(part[idx]);
@@ -37,14 +37,14 @@ public class EmployeeManager {
             System.out.println("Loading data ...");
             try {
                 String newLine = args[0].substring(1);
-                appendToFile(cons.filename, ", " + newLine);
+                appendToFile("employees.txt", ", " + newLine);
             } catch (Exception e) {
             }
             System.out.println("Data Loaded.");
         } else if (args[0].contains("?")) {
             System.out.println("Loading data ...");
             try {
-                String[] part = readFile(cons.filename);
+                String[] part = readFile("employees.txt");
                 String query = args[0].substring(1);
                 boolean found = Arrays.asList(part).contains(query);
                 System.out.println(found ? "Employee found!" : "Employee not found.");
@@ -54,7 +54,7 @@ public class EmployeeManager {
         } else if (args[0].contains("c")) {
             System.out.println("Loading data ...");
             try {
-                String[] part = readFile(cons.filename);
+                String[] part = readFile("employees.txt");
                 int wordCount = Arrays.stream(part).mapToInt(s -> s.split(" ").length).sum();
                 System.out.println(wordCount + " word(s) found.");
             } catch (Exception e) {
@@ -63,25 +63,25 @@ public class EmployeeManager {
         } else if (args[0].contains("u")) {
             System.out.println("Loading data ...");
             try {
-                String[] part = readFile(cons.filename);
+                String[] part = readFile("employees.txt");
                 String target = args[0].substring(1);
                 for (int i = 0; i < part.length; i++) {
                     if (part[i].equals(target)) {
                         part[i] = "Updated";
                     }
                 }
-                writeToFile(cons.filename, String.join(",", part));
+                writeToFile("employees.txt", String.join(",", part));
             } catch (Exception e) {
             }
             System.out.println("Data Updated.");
         } else if (args[0].contains("d")) {
             System.out.println("Loading data ...");
             try {
-                String[] part = readFile(cons.filename);
+                String[] part = readFile("employees.txt");
                 String target = args[0].substring(1);
                 List<String> list = new ArrayList<>(Arrays.asList(part));
                 list.remove(target);
-                writeToFile(cons.filename, String.join(",", list));
+                writeToFile("employees.txt", String.join(",", list));
             } catch (Exception e) {
             }
             System.out.println("Data Deleted.");
